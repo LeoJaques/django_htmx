@@ -1,0 +1,32 @@
+<table class="table table-striped">
+<thead>
+    <tr>
+      <th scope="col">Nome do Produto</th>
+      <th scope="col">Preço (R$)</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for product in products %}
+    <tr>
+        <td>{{ product.name|upper }}</td>
+        <td>{{ product.price|floatformat:2 }}</td>
+        <td>
+            <div>
+                <p style="cursor:pointer;" class="badge bg-danger" 
+                hx-delete="{% url 'delete_product' product.id%}"
+                hx-trigger="click"
+                hx-target="#list-products"
+                >X</p>
+            </div>
+        </td>
+    </tr>
+    {% empty %}
+        <tr>
+        <td colspan="3" class="text-center">Nenhum produto encontrado.</td>
+        </tr>
+    {% endfor %}
+   
+  </tbody>
+</table>
